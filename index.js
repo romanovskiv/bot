@@ -1,12 +1,15 @@
-const { Telegraf } = require('telegraf');
+const { Telegraf, Markup } = require('telegraf');
+const { Keyboard } = require('telegram-keyboard');
 const axios = require('axios');
 require('dotenv').config();
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
-bot.start((ctx) => ctx.reply('Welcome'));
+bot.start((ctx) => {
+    ctx.reply('hi');
+});
+
 bot.help((ctx) => ctx.reply('Send me a sticker'));
-bot.on('sticker', (ctx) => ctx.reply('👍'));
-bot.hears('hi', async(ctx) => {
+bot.hears('💰 Курсы волют', async(ctx) => {
     try {
         const currencyObj = await axios.get(
             'https://www.cbr-xml-daily.ru/daily_json.js'
@@ -30,9 +33,13 @@ bot.hears('hi', async(ctx) => {
     }
     //res.data.Valute.USD
 });
+bot.on('text', async(ctx) => {
+    const keyboard = Keyboard.make([
+        ['💰 Курсы волют'],
+        ['🌤 Прогноз погоды']
+    ]);
+
+    await ctx.reply('ss', keyboard.reply());
+});
 
 bot.launch();
-
-// Enable graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'));
-process.once('SIGTERM', () => bot.stop('SIGTERM'));
