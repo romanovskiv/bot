@@ -39,7 +39,7 @@ bot.on('text', async(ctx) => {
         ['🌤 Прогноз погоды']
     ]);
 
-    await ctx.reply('ss', keyboard.reply());
+    await ctx.reply('Еще не готово', keyboard.reply());
 });
 
 bot.launch();
