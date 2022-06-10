@@ -35,7 +35,7 @@ bot.hears('💰 Курсы волют', async(ctx) => {
 });
 bot.on('text', async(ctx) => {
     const keyboard = Keyboard.make([
-        ['💰 Курсы волют'],
+        ['💰 Курсы валют'],
         ['🌤 Прогноз погоды']
     ]);
 
