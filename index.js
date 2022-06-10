@@ -28,6 +28,23 @@ bot.hears('💰 Курсы валют', async(ctx) => {
     }
     //res.data.Valute.USD
 });
+bot.hears('🌤 Прогноз погоды', async(ctx) => {
+    try {
+        const tempObj = await axios.get(
+            'https://api.openweathermap.org/data/2.5/weather?id=498817&units=metric&lang=ru&appid=ca2d4d1512a4e385e81176132d320c28'
+        );
+        console.log(tempObj.data);
+        return ctx.replyWithMarkdown(`Cегодня в *${tempObj.data.name}e* ${tempObj.data.weather[0].description}
+
+**_Cредняя температура_** : ${tempObj.data.main.temp} °C
+**_Cкорость ветра_** : ${tempObj.data.wind.speed} м/с
+
+
+`);
+    } catch (error) {
+        ctx.reply('Ошибка: ' + error);
+    }
+});
 bot.command('start', (ctx) => {
     return ctx.reply(
         'Узнай погоду и курсы валют на сегодня!',
