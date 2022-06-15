@@ -7,8 +7,8 @@ const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 const weatherIcon = new Map([
     ['01d', '🌞'],
     ['02d', '🌤'],
-    ['03d', '☁️'],
-    ['04d', '☁️⚫️'],
+    ['03d', '🌥'],
+    ['04d', '☁️'],
     ['09d', '🌧'],
     ['10d', '🌦'],
     ['11d', '⛈⚡️'],
