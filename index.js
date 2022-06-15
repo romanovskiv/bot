@@ -79,16 +79,12 @@ bot.hears('🌤 Прогноз погоды', async(ctx) => {
         
 🌡 **_Погода сейчас_** :  ${tempObj.data.main.temp.toFixed(1)} °C
 🗿 **_Ощущается как_** :  ${tempObj.data.main.feels_like.toFixed(1)} °C
-🏃🏿‍♂️ **_Максимальная температура сегодня_** :  ${tempObj.data.main.temp_max.toFixed(
-      1
-    )} °C
-👨🏿‍🦽 **_Минимальная температура сегодня_** :  ${tempObj.data.main.temp_min.toFixed(
-      1
-    )} °C
+🔺 **_Максимальная температура_** :  ${tempObj.data.main.temp_max.toFixed(1)} °C
+🔻 **_Минимальная температура_** :  ${tempObj.data.main.temp_min.toFixed(1)} °C
 💨 **_Cкорость ветра_** :  ${tempObj.data.wind.speed} м/с
 
-🌅 **_Рассвет_** :  ${humanDateFormatSunrise} 
-🌆 **_Закат_** :  ${humanDateFormatSunset} 
+🌄 **_Рассвет_** :  ${humanDateFormatSunrise} 
+🌇 **_Закат_** :  ${humanDateFormatSunset}
 
 
 `);
