@@ -60,13 +60,17 @@ bot.hears('🌤 Прогноз погоды', async(ctx) => {
         const unixTimestampSunset = tempObj.data.sys.sunset;
         const millisecondsSunset = unixTimestampSunset * 1000;
         const dateObjectSunset = new Date(millisecondsSunset);
-        const humanDateFormatSunset = dateObjectSunset.toLocaleString('ru');
+        const humanDateFormatSunset = dateObjectSunset.toLocaleString('ru-RU', {
+            timeZone: 'Europe/Moscow',
+        });
 
         // Рассвет
         const unixTimestampSunrise = tempObj.data.sys.sunrise;
         const millisecondsSunrise = unixTimestampSunrise * 1000;
         const dateObjectSunrise = new Date(millisecondsSunrise);
-        const humanDateFormatSunrise = dateObjectSunrise.toLocaleString('ru');
+        const humanDateFormatSunrise = dateObjectSunrise.toLocaleString('ru-RU', {
+            timeZone: 'Europe/Moscow',
+        });
 
         // Бот
         ctx.replyWithMarkdown(`Cегодня в *${tempObj.data.name}e* ${
