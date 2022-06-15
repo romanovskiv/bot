@@ -60,13 +60,13 @@ bot.hears('🌤 Прогноз погоды', async(ctx) => {
         const unixTimestampSunset = tempObj.data.sys.sunset;
         const millisecondsSunset = unixTimestampSunset * 1000;
         const dateObjectSunset = new Date(millisecondsSunset);
-        const humanDateFormatSunset = dateObjectSunset.toLocaleString();
+        const humanDateFormatSunset = dateObjectSunset.toLocaleString('ru');
 
         // Рассвет
         const unixTimestampSunrise = tempObj.data.sys.sunrise;
         const millisecondsSunrise = unixTimestampSunrise * 1000;
         const dateObjectSunrise = new Date(millisecondsSunrise);
-        const humanDateFormatSunrise = dateObjectSunrise.toLocaleString();
+        const humanDateFormatSunrise = dateObjectSunrise.toLocaleString('ru');
 
         // Бот
         ctx.replyWithMarkdown(`Cегодня в *${tempObj.data.name}e* ${
