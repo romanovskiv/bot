@@ -29,9 +29,11 @@ bot.hears('🌤 Прогноз погоды', async(ctx) => {
         return await ctx.reply('<b>Выберите город</b> ✔️', {
             parse_mode: 'HTML',
             ...Markup.inlineKeyboard([
-                Markup.button.callback('Санкт-Петербург', 'btn_spb'),
-                Markup.button.callback('Ростов', 'btn_rostov'),
-                Markup.button.callback('Сочи', 'btn_sochi'),
+                [Markup.button.callback('Санкт-Петербург', 'btn_spb')],
+                [
+                    Markup.button.callback('Ростов', 'btn_rostov'),
+                    Markup.button.callback('Сочи', 'btn_sochi'),
+                ],
             ]),
         });
     } catch (error) {
