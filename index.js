@@ -24,6 +24,30 @@ const weatherIcon = new Map([
     ['13n', '❄️🌑'],
     ['50n', '🌫🌑'],
 ]);
+bot.hears('💰 Курсы валют', async(ctx) => {
+    try {
+        const currencyObj = await axios.get(
+            'https://www.cbr-xml-daily.ru/daily_json.js'
+        );
+        return ctx.replyWithMarkdown(
+            `
+              📅 **_Курсы на сегодня_** :
+  
+  💵 Доллар:  *${currencyObj.data.Valute.USD.Value}*
+  💶 Евро:  *${currencyObj.data.Valute.EUR.Value}*
+  🇹🇷 Турецкая лира:  *${currencyObj.data.Valute.TRY.Value / 10}*
+  
+  **_на момент_** — *${currencyObj.data.Date.slice(
+    0,
+    10
+  )}  ${currencyObj.data.Date.slice(11, 25)}*
+  `
+        );
+    } catch (error) {
+        ctx.reply('Ошибка: ' + error);
+    }
+    //res.data.Valute.USD
+});
 bot.hears('🌤 Прогноз погоды', async(ctx) => {
     try {
         return await ctx.reply('<b>Выберите город</b> ✔️', {
