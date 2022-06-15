@@ -4,6 +4,26 @@ const axios = require('axios');
 require('dotenv').config();
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
+const weatherIcon = new Map([
+    ['01d', '🌞'],
+    ['02d', '🌤'],
+    ['03d', '☁️'],
+    ['04d', '☁️⚫️'],
+    ['09d', '🌧'],
+    ['10d', '🌦'],
+    ['11d', '⛈⚡️'],
+    ['13d', '❄️'],
+    ['50d', '🌫'],
+    ['01n', '🌞🌑'],
+    ['02n', '🌤🌑'],
+    ['03n', '☁️🌑'],
+    ['04n', '☁️⚫️🌑'],
+    ['09n', '🌧🌑'],
+    ['10n', '🌦🌑'],
+    ['11n', '⛈⚡️🌑'],
+    ['13n', '❄️🌑'],
+    ['50n', '🌫🌑'],
+]);
 bot.hears('💰 Курсы валют', async(ctx) => {
     try {
         const currencyObj = await axios.get(
