@@ -31,16 +31,51 @@ bot.hears('💰 Курсы валют', async(ctx) => {
 bot.hears('🌤 Прогноз погоды', async(ctx) => {
     try {
         const tempObj = await axios.get(
-            'https://api.openweathermap.org/data/2.5/weather?id=498817&units=metric&lang=ru&appid=ca2d4d1512a4e385e81176132d320c28'
+            'https://api.openweathermap.org/data/2.5/weather?id=498817&units=metric&UTC&lang=ru&appid=ca2d4d1512a4e385e81176132d320c28'
         );
         console.log(tempObj.data);
-        return ctx.replyWithMarkdown(`Cегодня в *${tempObj.data.name}e* ${tempObj.data.weather[0].description}
+        const currentWeatherIcon = weatherIcon.get(tempObj.data.weather[0].icon);
 
-**_Cредняя температура_** : ${tempObj.data.main.temp} °C
-**_Cкорость ветра_** : ${tempObj.data.wind.speed} м/с
+        // Закат
+        const unixTimestampSunset = tempObj.data.sys.sunset;
+        const millisecondsSunset = unixTimestampSunset * 1000;
+        const dateObjectSunset = new Date(millisecondsSunset);
+        const humanDateFormatSunset = dateObjectSunset.toLocaleString();
+
+        // Рассвет
+        const unixTimestampSunrise = tempObj.data.sys.sunrise;
+        const millisecondsSunrise = unixTimestampSunrise * 1000;
+        const dateObjectSunrise = new Date(millisecondsSunrise);
+        const humanDateFormatSunrise = dateObjectSunrise.toLocaleString();
+
+        // Бот
+        ctx.replyWithMarkdown(`Cегодня в *${tempObj.data.name}e* ${
+      tempObj.data.weather[0].description
+    }  ${currentWeatherIcon}
+        
+🌡 **_Погода сейчас_** :  ${tempObj.data.main.temp.toFixed(1)} °C
+🗿 **_Ощущается как_** :  ${tempObj.data.main.feels_like.toFixed(1)} °C
+🏃🏿‍♂️ **_Максимальная температура сегодня_** :  ${tempObj.data.main.temp_max.toFixed(
+      1
+    )} °C
+👨🏿‍🦽 **_Минимальная температура сегодня_** :  ${tempObj.data.main.temp_min.toFixed(
+      1
+    )} °C
+💨 **_Cкорость ветра_** :  ${tempObj.data.wind.speed} м/с
+
+🌅 **_Рассвет_** :  ${humanDateFormatSunrise} 
+🌆 **_Закат_** :  ${humanDateFormatSunset} 
 
 
 `);
+
+        // if (tempObj.data.rain) {
+        //     ctx.reply(
+        //         `🌧**_Вероятность дождя_** : ${tempObj.data.rain['1h'] * 100} %`
+        //     );
+        // } else {
+        //     ctx.replyWithMarkdown(`🌧**_Вероятность дождя_** : 0 %`);
+        // }
     } catch (error) {
         ctx.reply('Ошибка: ' + error);
     }
