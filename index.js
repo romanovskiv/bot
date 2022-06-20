@@ -115,6 +115,7 @@ bot.action('btn_search', async(ctx) => {
 🔺 **_Максимальная температура_** :  ${tempObj.data.main.temp_max.toFixed(1)} °C
 🔻 **_Минимальная температура_** :  ${tempObj.data.main.temp_min.toFixed(1)} °C
 💨 **_Cкорость ветра_** :  ${tempObj.data.wind.speed} м/с
+💦 **_Влажность воздуха_** :  ${tempObj.data.main.humidity} %
 
 🌄 **_Рассвет_** :  ${humanDateFormatSunrise} 
 🌇 **_Закат_** :  ${humanDateFormatSunset} 
